@@ -17,10 +17,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-    @PropertySource("classpath:db.properties")
-    @EnableTransactionManagement
-    @ComponentScan(value = "web")
-    public class AppConfig {
+@PropertySource("classpath:db.properties")
+@EnableTransactionManagement
+@ComponentScan(value = "web")
+public class AppConfig {
 
     private Environment env;
 
@@ -40,7 +40,7 @@ import java.util.Properties;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean createEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
         em.setPackagesToScan(env.getRequiredProperty("db.entity.package"));
@@ -56,7 +56,7 @@ import java.util.Properties;
     }
 
     @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
+    public JpaTransactionManager createJpaTransactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
 }

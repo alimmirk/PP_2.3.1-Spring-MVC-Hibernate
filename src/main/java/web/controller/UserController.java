@@ -29,9 +29,8 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String CreateUserForm(@ModelAttribute("user") User user) {
+    public String сreateUserForm(@ModelAttribute("user") User user) {
         return "new";
-
     }
 
     @PostMapping("/new")
@@ -55,7 +54,6 @@ public class UserController {
     public String getEditUserForm(Model model, @RequestParam("id") long id) {
         model.addAttribute("user", userService.findById(id));
         return "update";
-
     }
 
     @PostMapping("/update")

@@ -1,9 +1,8 @@
 package web.model;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -76,6 +75,21 @@ public class User {
                 ", country='" + country + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(name, user.name)
+                && Objects.equals(country, user.country)
+                && Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, country, email);
     }
 }
 
